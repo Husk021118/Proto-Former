@@ -2,7 +2,7 @@
 
 
 # Results
-You can deownload our pretrained model from https://drive.google.com/drive/folders/1quJr03ot8smZLJ9tWUXL6Eo-HY2fYqD9?usp=sharing
+You can download our pretrained model from https://drive.google.com/drive/folders/1quJr03ot8smZLJ9tWUXL6Eo-HY2fYqD9?usp=sharing
 
 # Training
 After preparing the training data, please use:
