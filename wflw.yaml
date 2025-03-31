@@ -1,0 +1,200 @@
+MODEL:
+    NAME: pose_transformer
+    INIT_WEIGHTS: True
+    PRETRAINED: ''
+    TARGET_TYPE: 'coord'
+    TAG_PER_JOINT: True
+    IMAGE_SIZE: [512, 512]  # width * height, ex: 192 * 256 [256, 256]
+    LANDMARKS: 125 #125
+    EXTRA:
+        NUM_LAYERS: 50
+        HIDDEN_DIM: 256
+        DROPOUT: 0.0
+        NHEADS: 8
+        DIM_FEEDFORWARD: 2048
+        POS_EMBED_METHOD: sine
+        DILATION: False
+        AUX_LOSS: True
+        KPT_LOSS_COEF: 5.0
+        ENC_LAYERS: 6
+        DEC_LAYERS: 6
+        EOS_COEF: 0.1
+        PRE_NORM: false
+        NUM_FEATURE_LEVELS: 1
+        LR_BACKBONE_NAMES: ["backbone.0"]
+LOSS:
+#    USE_OHKM: False
+#    TOPK: 8
+    USE_TARGET_WEIGHT: True
+#    USE_DIFFERENT_JOINTS_WEIGHT: False
+
+DATASET_COFW:
+    DATASET: COFW
+    TRAINSET: /home/a/data/cofw/COFW_train_color.mat
+    TESTSET: /home/a/data/cofw/COFW_test_color.mat
+    DATA_DIR: /home/a/data/cofw/
+    FLIP: True
+    SCALE_FACTOR: 0.25
+    ROT_FACTOR: 30
+    NUM_LANDMARKS: 29
+    LANDMARK_INDEX:  [ 49, 62, 53, 58, 51, 56, 60, 64,  # brow 8 (0-7)
+                    78, 96, 84, 90, 81, 87, 93, 99,  # eyes 8 (8-15)
+                    122, 123, #pupil 2 (16, 17)
+                    76, 77, 70, 73,  # //nose 4 (18-21)
+                    102, 108, 105, 116, 120, 111,  # mouth 6 (22-27)
+                    24, # chin 1  (28)
+                    124] #原来这里是背景124
+
+DATASET_WFLW:
+    DATASET: WFLW
+    ROOT: /home/a/data/wflw/WFLW_images
+    DATA_DIR: /home/a/data/wflw/
+    TRAINSET: /home/a/data/wflw/face_landmarks_wflw_train.csv
+    TESTSET: /home/a/data/wflw/face_landmarks_wflw_test.csv
+#    TESTSET: /home/a/data/wflw/face_landmarks_wflw_test_blur.csv
+    FLIP: True
+    SCALE_FACTOR: 0.25
+    ROT_FACTOR: 30
+    NUM_LANDMARKS: 98
+    LANDMARK_INDEX: [ 0, 2, 4, 6, 7, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 23, 24,  # left chin (0-16) 24 chin center
+                    25, 27, 28, 29, 31, 32, 34, 35, 36, 38, 39, 41, 43, 44, 46, 47,  # right chin (17-32)
+                    49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66,  # brow (33-50)
+                    67, 68, 69, 70, 71, 72, 73, 74, 75,  # nose 9 (51-59)
+                    78, 79, 81, 82, 84, 85, 87, 89, 90, 92, 93, 95, 96, 97, 99, 101,  # eyes 16 (60-75)
+                    102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, # mouth 20 (76-95)
+                    122, 123, # pupil 2 (96-97) background
+                    124] #背景
+
+DATASET_300W:
+    DATASET: 300W
+    TRAINSET: /home/a/data/300W/train.tsv
+#    TESTSET: /home/a/data/300W/test_ibug.tsv
+    TESTSET: /home/a/data/300W/test.tsv
+    DATA_DIR: /home/a/data/300W/
+    FLIP: True
+    SCALE_FACTOR: 0.25
+    ROT_FACTOR: 30
+    NUM_LANDMARKS: 68
+    LANDMARK_INDEX:   [ 1, 3, 5, 8, 11, 15, 19, 22, 24,  # left chin (0-8) 24 chin center
+                         26, 30, 33, 37, 40, 42, 45, 48,  # right chin (9-16)
+                         49, 50, 51, 52, 53, 58, 59, 60, 61, 62,  # brow (17-26)
+                         67, 68, 69, 70, 71, 72, 73, 74, 75,   # nose 9 (27-35)
+                         78, 80, 83, 84, 86, 88, 90, 91, 94, 96, 98, 100, # eyes 12 (36-47)
+                         102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, # mouth 20 (48-67)
+                         124] #背景
+
+DATASET_AFLW:
+    DATASET: AFLW
+    TRAINSET: /home/a/data/aflw/face_landmarks_aflw_train.csv
+    TESTSET: /home/a/data/aflw/face_landmarks_aflw_test.csv
+    DATA_DIR: /home/a/data/aflw/
+    FLIP: True
+    SCALE_FACTOR: 0.25
+    ROT_FACTOR: 30
+    NUM_LANDMARKS: 19
+    LANDMARK_INDEX: [ 49, 51, 53, 58, 60, 62,  # brow 6 (0-5)
+                    78, 122, 84, 90, 123, 96,  # eyes 6 (6-11)
+                    76, 70, 77,  # nose 3 (12-14)
+                    102, 120, 108,  # mouth 3 (15-17)
+                    24, # chin 1 (18)
+                    124] #背景
+#DATASET_COFW:
+#    DATASET: COFW
+#    TRAINSET: C:\Users\Administrator\Desktop\Datasets\cofw\COFW_train_color.mat
+#    TESTSET: C:\Users\Administrator\Desktop\Datasets\cofw\COFW_test_color.mat
+#    DATA_DIR: C:\Users\Administrator\Desktop\Datasets\cofw\
+#    FLIP: True
+#    SCALE_FACTOR: 0.25
+#    ROT_FACTOR: 30
+#    NUM_LANDMARKS: 29
+#    LANDMARK_INDEX:  [ 49, 62, 53, 58, 51, 56, 60, 64,  # brow 8 (0-7)
+#                    78, 96, 84, 90, 81, 87, 93, 99,  # eyes 8 (8-15)
+#                    122, 123, #pupil 2 (16, 17)
+#                    76, 77, 70, 73,  # //nose 4 (18-21)
+#                    102, 108, 105, 116, 120, 111,  # mouth 6 (22-27)
+#                    24, # chin 1  (28)
+#                    124] #原来这里是背景124
+#
+#DATASET_WFLW:
+#    DATASET: WFLW
+#    ROOT: C:\Users\Administrator\Desktop\Datasets\wflw\WFLW_images
+#    DATA_DIR: C:\Users\Administrator\Desktop\Datasets\wflw\
+#    TRAINSET: C:\Users\Administrator\Desktop\Datasets\wflw\face_landmarks_wflw_train.csv
+#    TESTSET: C:\Users\Administrator\Desktop\Datasets\wflw\face_landmarks_wflw_test.csv
+#    FLIP: True
+#    SCALE_FACTOR: 0.25
+#    ROT_FACTOR: 30
+#    NUM_LANDMARKS: 98
+#    LANDMARK_INDEX: [ 0, 2, 4, 6, 7, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 23, 24,  # left chin (0-16) 24 chin center
+#                    25, 27, 28, 29, 31, 32, 34, 35, 36, 38, 39, 41, 43, 44, 46, 47,  # right chin (17-32)
+#                    49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66,  # brow (33-50)
+#                    67, 68, 69, 70, 71, 72, 73, 74, 75,  # nose 9 (51-59)
+#                    78, 79, 81, 82, 84, 85, 87, 89, 90, 92, 93, 95, 96, 97, 99, 101,  # eyes 16 (60-75)
+#                    102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, # mouth 20 (76-95)
+#                    122, 123, # pupil 2 (96-97) background
+#                    124] #背景
+#
+#DATASET_300W:
+#    DATASET: 300W
+#    TRAINSET: C:\Users\Administrator\Desktop\Datasets\300W\train.tsv
+#    TESTSET: C:\Users\Administrator\Desktop\Datasets\300W\test_ibug.tsv
+##    TESTSET: C:\Users\Administrator\Desktop\Datasets\300W\test.tsv
+#    DATA_DIR: C:\Users\Administrator\Desktop\Datasets\300W\
+#    FLIP: True
+#    SCALE_FACTOR: 0.25
+#    ROT_FACTOR: 30
+#    NUM_LANDMARKS: 68
+#    LANDMARK_INDEX:   [ 1, 3, 5, 8, 11, 15, 19, 22, 24,  # left chin (0-8) 24 chin center
+#                         26, 30, 33, 37, 40, 42, 45, 48,  # right chin (9-16)
+#                         49, 50, 51, 52, 53, 58, 59, 60, 61, 62,  # brow (17-26)
+#                         67, 68, 69, 70, 71, 72, 73, 74, 75,   # nose 9 (27-35)
+#                         78, 80, 83, 84, 86, 88, 90, 91, 94, 96, 98, 100, # eyes 12 (36-47)
+#                         102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, # mouth 20 (48-67)
+#                         124] #背景
+#
+#DATASET_AFLW:
+#    DATASET: AFLW
+#    TRAINSET: C:\Users\Administrator\Desktop\Datasets\aflw\face_landmarks_aflw_train.csv
+#    TESTSET: C:\Users\Administrator\Desktop\Datasets\aflw\face_landmarks_aflw_test.csv
+#    DATA_DIR: C:\Users\Administrator\Desktop\Datasets\aflw\
+#    FLIP: True
+#    SCALE_FACTOR: 0.25
+#    ROT_FACTOR: 30
+#    NUM_LANDMARKS: 19
+#    LANDMARK_INDEX: [ 49, 51, 53, 58, 60, 62,  # brow 6 (0-5)
+#                    78, 122, 84, 90, 123, 96,  # eyes 6 (6-11)
+#                    76, 70, 77,  # nose 3 (12-14)
+#                    102, 120, 108,  # mouth 3 (15-17)
+#                    24, # chin 1 (18)
+#                    124] #背景
+TRAIN:
+    BATCH_SIZE_PER_GPU: 8
+    OPTIMIZER: 'adamW'
+    LR: 5.0e-5
+    LR_BACKBONE: 5.0e-5
+    WD: 0.0001
+    GAMMA1: 0.99
+    GAMMA2: 0.0
+    MOMENTUM: 0.9
+    CLIP_MAX_NORM: 0.1
+    LR_FACTOR: 0.5
+    NESTEROV: false
+    LR_STEP: [60, 100]
+    END_EPOCH: 100
+    LARGEST_NUM: 20000
+    EXPERT_NUM: 16
+    TOP_K: 8
+TEST:
+    NUM_POINTS: 68
+    SHUFFLE: True
+    BATCH_SIZE_PER_GPU: 40
+DEBUG:
+    DEBUG: False
+    SAVE_BATCH_IMAGES_GT: True
+    SAVE_BATCH_IMAGES_PRED: True
+
+LOG_DIR: './log'
+OUTPUT_DIR: './output'
+WORKERS: 8
+PRINT_FREQ: 500
+PIN_MEMORY: False
