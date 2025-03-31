@@ -5,7 +5,7 @@
 You can download our pretrained model from https://drive.google.com/drive/folders/1quJr03ot8smZLJ9tWUXL6Eo-HY2fYqD9?usp=sharing
 
 # Datasets
-You can download the dataset from the following webpage:
+You can download the dataset from the following link:
 | Dataset | Webpage(powered by Google Drive) |
 |------|----|
 | AFLW  | https://drive.google.com/drive/folders/1CG-6OxaJpkwmzHNnPHEAU7y_fVjMjIAl?usp=sharing | 
