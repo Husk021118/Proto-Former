@@ -1,8 +1,6 @@
-# Proto-Former
+<h1 align="center">Proto-Former: Unified Facial Landmark Detection by Prototype Transformer</h1>
 
 
-# Results
-You can download our pretrained model from https://drive.google.com/drive/folders/1quJr03ot8smZLJ9tWUXL6Eo-HY2fYqD9?usp=sharing
 
 # Datasets
 You can download the dataset from the following link:
@@ -18,6 +16,9 @@ After preparing the training data, please use:
 ```python
 python train.py
 ```
+
+# Results
+You can download our pretrained model from https://drive.google.com/drive/folders/1quJr03ot8smZLJ9tWUXL6Eo-HY2fYqD9?usp=sharing
 
 # Contact
 Please don't hesitate to contact me if you meet any problems when using this code.<br>
